@@ -1,0 +1,32 @@
+ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px;
+    white-space: nowrap;
+    font-size: 26px;
+    line-height: 1.5;
+  }
+  a {
+    text-decoration: none;
+  }
+  ::-webkit-scrollbar{
+    display: none;
+  }
+  .active {
+    color: white;
+    background-color: skyblue;
+  }
+  .indicator{
+    background-color: brown;
+    height: 2px;
+    width: 3.3rem;
+    margin-top: 2px;
+  }
