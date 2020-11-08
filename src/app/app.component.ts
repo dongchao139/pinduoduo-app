@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ImageSlider } from './components/image-slider/image-slider.component';
+import { Component, ViewChild } from '@angular/core';
+import { ImageSlider, ImageSliderComponent } from './components/image-slider/image-slider.component';
 import {TopMenu} from './components/tab-bar'
 
 @Component({
@@ -9,9 +9,9 @@ import {TopMenu} from './components/tab-bar'
     (onSelect)="handleSelect($event)"
     [backgroundColor]="backgroundColor"
   >
-  <span>content</span>
   </tab-bar>
-  <image-slider [sliders]="sliders"></image-slider>
+  <image-slider [sliders]="sliders">
+  </image-slider>
   `,
   styles: [``]
 })
@@ -19,6 +19,11 @@ export class AppComponent {
   topMenus: TopMenu[];
   backgroundColor: string;
   sliders: ImageSlider[];
+  title = 'pinduoduo-app';
+
+  @ViewChild(ImageSliderComponent, {static: true})
+  imageSlider: ImageSliderComponent;
+  
   constructor() {
     this.topMenus = [{
       title: '热门',
@@ -71,11 +76,14 @@ export class AppComponent {
       caption: ''
     }]
   }
-  title = 'pinduoduo-app';
   
   handleSelect(menuItem: TopMenu) {
     const colors = ['yellowgreen','skyblue','orangered'];
     const idx = Math.floor(Math.random() * 3);
     this.backgroundColor = colors[idx];
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.imageSlider);
   }
 }

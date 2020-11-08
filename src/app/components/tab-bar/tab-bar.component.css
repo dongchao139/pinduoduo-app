@@ -3,6 +3,8 @@ ul {
     margin: 0;
     display: flex;
     flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   ul li {
     display: flex;
