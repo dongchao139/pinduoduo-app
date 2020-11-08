@@ -1,11 +1,11 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
-import {Emoji} from '../../decorators';
+import {Emoji,Confirmable} from '../../decorators';
 
 @Component({
     selector: 'horizontal-grid',
     template: `
     <input type="text" [(ngModel)]="username" />
-    <span>你好{{username}}</span>
+    <span (click)="handleClick()">你好{{username}}</span>
     {{result}}
     `,
     styleUrls: ['horizontal-grid.component.css']
@@ -30,5 +30,10 @@ export class HorizontalGridComponent implements OnInit {
     public set username(value: string) {
         this._username = value;
         this.usernameChange.emit(value);
+    }
+
+    @Confirmable("是否确认执行")
+    handleClick() {
+        console.log('click 执行');
     }
 }
