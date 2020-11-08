@@ -12,6 +12,7 @@ import {TopMenu} from './components/tab-bar'
   </tab-bar>
   <image-slider [sliders]="sliders">
   </image-slider>
+  <horizontal-grid></horizontal-grid>
   `,
   styles: [``]
 })

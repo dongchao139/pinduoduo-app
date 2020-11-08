@@ -2,14 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {ImageSliderComponent, TabBarComponent} from './components';
+import {HorizontalGridComponent, ImageSliderComponent, 
+  TabBarComponent} from './components';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,TabBarComponent,ImageSliderComponent
+    AppComponent,
+    TabBarComponent,
+    ImageSliderComponent,
+    HorizontalGridComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

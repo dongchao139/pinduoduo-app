@@ -1,0 +1,1 @@
+export {HorizontalGridComponent} from './horizontal-grid.component';
