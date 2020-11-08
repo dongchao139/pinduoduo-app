@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { ImageSlider, ImageSliderComponent } from './components/image-slider/image-slider.component';
-import {TopMenu} from './components/tab-bar'
+import { ImageSlider, ImageSliderComponent } from './shared/components/image-slider';
+import {TopMenu} from './shared/components/tab-bar'
 
 @Component({
   selector: 'app-root',

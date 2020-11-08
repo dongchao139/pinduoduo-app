@@ -1,10 +1,12 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import {Emoji} from '../../decorators';
 
 @Component({
     selector: 'horizontal-grid',
     template: `
     <input type="text" [(ngModel)]="username" />
     <span>你好{{username}}</span>
+    {{result}}
     `,
     styleUrls: ['horizontal-grid.component.css']
 })
@@ -13,6 +15,9 @@ export class HorizontalGridComponent implements OnInit {
 
     @Output()
     usernameChange = new EventEmitter();
+
+    @Emoji()
+    result: string = "Hello"
 
     constructor() { }
 

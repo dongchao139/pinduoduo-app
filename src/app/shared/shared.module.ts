@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {HorizontalGridComponent, ImageSliderComponent, 
-  TabBarComponent} from '../components';
+import {HorizontalGridComponent, ImageSliderComponent, TabBarComponent} from './components';
 
 @NgModule({
   declarations: [
