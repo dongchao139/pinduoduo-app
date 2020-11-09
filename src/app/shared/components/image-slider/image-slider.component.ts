@@ -19,8 +19,9 @@ export interface ImageSlider {
         </div>
         <div class="nav-section">
             <span *ngFor="let _ of sliders; let i = index" 
-            [ngClass]="{'slide-button-select': i === selectedIndex}"
-            class="slide-button"></span>
+                [ngClass]="{'slide-button-select': i === selectedIndex}"
+                class="slide-button"
+            ></span>
         </div>
     </div>
     `,
@@ -45,7 +46,7 @@ export class ImageSliderComponent implements OnInit {
 
     selectedIndex: number = 0;
 
-    intervalId;
+    intervalId: NodeJS.Timer;
 
     constructor(private rd2:Renderer2) { }
 
