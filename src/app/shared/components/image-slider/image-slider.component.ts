@@ -33,7 +33,7 @@ export class ImageSliderComponent implements OnInit {
     sliders: ImageSlider[];
 
     @Input()
-    intervalSeconds: number = 2000;
+    intervalSeconds: number = 5000;
 
     @Input()
     scrollHeight: string = '180px';
