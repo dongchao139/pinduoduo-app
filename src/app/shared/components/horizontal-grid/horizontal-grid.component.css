@@ -5,8 +5,11 @@ input {
 :host {
     display: flex;
     justify-content: space-between;
-    overflow: auto;
+    overflow-x: auto;
     margin: 1rem;
     font-size: 14px;
     flex-wrap: wrap;
+}
+.special{
+    background-color: orangered;
 }

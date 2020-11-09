@@ -46,7 +46,7 @@ export class ImageSliderComponent implements OnInit {
 
     selectedIndex: number = 0;
 
-    intervalId: NodeJS.Timer;
+    intervalId;
 
     constructor(private rd2:Renderer2) { }
 
