@@ -4,6 +4,7 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked,
 import { Component, Input, OnInit, Output } from "@angular/core";
 
 export interface TopMenu {
+  id: number;
   title: string;
   readonly link?: string;
 }
@@ -15,7 +16,7 @@ export interface TopMenu {
   template: `
     <ul [ngStyle]="{'background-color': backgroundColor}">
       <li *ngFor="let menu of menus; let i = index">
-        <a href="#" 
+        <a
           [class.active]="i === selectedIndex"
           [ngStyle]="{color: i === selectedIndex ? titleActiveColor: titleColor}"
           (click)="handleSelection(i)">

@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-router.module';
+import { HomeModule } from './home';
 
 /**
  * 导入其他模块时：
@@ -23,8 +25,23 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
   ],
+  /**
+   * 在功能模块中定义子路由后，只要导入该模块，等同于在根路由中直接定义
+   * 
+   * 也就是说在 AppModule 中导入 HomeModule 的时候，
+   *  由于 HomeModule 中导入了 HomeRoutingModule
+   *  在 HomeRoutingModule 中定义的路由会合并到根路由表.
+   * 
+   *  相当于直接在根模块中定义下面的数组:
+   * ```typescript
+   * const routes = [{
+   *   path: 'home',
+   *   component: HomeContainerComponent
+   * }]
+   * ```
+   */
   imports: [
-    BrowserModule,FormsModule,SharedModule
+    BrowserModule,FormsModule,SharedModule,AppRoutingModule,HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
