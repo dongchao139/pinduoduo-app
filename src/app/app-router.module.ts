@@ -6,7 +6,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    // 根路由使用forRoot，其他模块使用forChildren
+    // 根路由使用forRoot，其他模块使用forChild
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
