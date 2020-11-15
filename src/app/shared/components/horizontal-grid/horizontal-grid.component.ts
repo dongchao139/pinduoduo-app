@@ -29,6 +29,7 @@ export interface Channel {
     'grid-template-columns':templateColumns}"
     (scroll)="handleScroll($event)"
     >
+        <!-- 只显示具有gridItem指令的content-->
         <ng-content select="[gridItem]"></ng-content>
     </div>        
     <div class="underline" *ngIf="scrollable">

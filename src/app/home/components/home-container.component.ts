@@ -98,5 +98,13 @@ export class HomeContainerComponent implements OnInit {
         this.backgroundColor = colors[idx];
         // 路由导航
         this.router.navigate(['home',menuItem.link]);
+        
+        // 路径参数
+        // <a [router-link]="['home',menuItem.link,{name:'valkue'}]">...</a>
+        // this.router.navigate(['home',menuItem.link,{name:'val1'}]);
+
+        // 查询参数
+        // <a [router-link]="['home']" [queryParams]="{name:'value'}">...</a>
+        // this.router.navigate(['home',menuItem.link],{queryParams:{name: 'value'}});
     }
 }

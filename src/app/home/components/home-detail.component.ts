@@ -15,7 +15,7 @@ import { ImageSlider, ImageSliderComponent } from '../../shared/components/image
             <span gridItemTitle>{{item.title}}</span>
         </span>
         <div class="special">
-            <div gridItemImage="2rem" style="background-color:orangered"></div>
+            <div [gridItemImage]="'2rem'" style="background-color:orangered"></div>
             <span gridItemTitle>Hello</span>
         </div>
       </horizontal-grid>
@@ -23,7 +23,26 @@ import { ImageSlider, ImageSliderComponent } from '../../shared/components/image
     <ng-template #others>
         Other works
     </ng-template>
-    `
+    <!-- <a [routerLink]="['grand']">Link to grand</a> -->
+    <!--指定当前的活动链接-->
+    <a [routerLink]="[ 'grand' ]" routerLinkActive="active"
+      [queryParams]="{name: 'zhangsan'}"
+    >
+      Link to grand
+    </a>
+    <router-outlet></router-outlet>
+
+    <!--辅助插座，可以指定多个。和主要插座可以同时存在-->
+    <a [routerLink]="{outlets:{second: ['aux']}}">
+      Link to aux
+    </a>
+    <router-outlet name="second"></router-outlet>
+    `,
+    styles: [`
+    .active {
+      background-color: orangered;
+    }
+    `]
 })
 export class HomeDetailComponent implements OnInit {
   sliders: ImageSlider[];
@@ -110,7 +129,7 @@ export class HomeDetailComponent implements OnInit {
     // 查询参数（？k=v&k2=v2）
     this.route.queryParamMap.subscribe(params => {
       console.log("查询参数：", params);
-    })
+    });
   }
 
   ngAfterViewInit(): void {
