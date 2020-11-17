@@ -10,7 +10,7 @@ import { ImageSlider, ImageSliderComponent } from '../../shared/components/image
       <image-slider [sliders]="sliders">
       </image-slider>
       <horizontal-grid>
-        <span gridItem *ngFor="let item of channels">
+        <span gridItem *ngFor="let item of channels" #span>
             <img [src]="item.icon" alt="" [gridItemImage]="'4rem'"/>
             <span gridItemTitle>{{item.title}}</span>
         </span>

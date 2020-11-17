@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input, QueryList, ContentChildren, ElementRef } from '@angular/core';
 import {Emoji,Confirmable} from '../../decorators';
 
 export interface Channel {
@@ -54,6 +54,9 @@ export interface Channel {
 export class HorizontalGridComponent implements OnInit {
     private _username: string = "";
 
+    @ContentChildren('span')
+    spans: QueryList<ElementRef>;
+
     @Output()
     usernameChange = new EventEmitter();
 
@@ -67,6 +70,11 @@ export class HorizontalGridComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {}
+
+    ngAfterContentInit(): void {
+        console.log("@ContentChildren:");
+        console.log(this.spans);        
+    }
 
     public get username(): string {
         return this._username;
