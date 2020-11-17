@@ -31,7 +31,7 @@ export interface Channel {
     >
         <!-- 只显示具有gridItem指令的content-->
         <ng-content select="[gridItem]"></ng-content>
-    </div>        
+    </div>
     <div class="underline" *ngIf="scrollable">
         <div class="highlight" [ngStyle]="{'margin':sliderMargin}"></div>
     </div>
