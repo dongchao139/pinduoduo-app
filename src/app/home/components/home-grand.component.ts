@@ -18,7 +18,20 @@ class PurchaseOrder {
         this.product = product;
     }
 }
-
+/**
+ * 脏值检测
+ * 
+ * 什么是脏值检测？
+ * 当数据改变时更新试图
+ * 
+ * 什么时候会触发脏值检测？
+ * １：浏览器事件如click,mouseover,keyup等
+ * ２：setTimeout()和setInterval()
+ * 3: HTTP请求
+ * 
+ * 如何进行脏值检测？
+ * 检查两个状态值：当前状态和新状态
+ */
 @Component({
     selector: 'home-grand',
     template: `
