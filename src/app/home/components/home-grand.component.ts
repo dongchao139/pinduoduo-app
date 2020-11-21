@@ -22,12 +22,13 @@ class PurchaseOrder {
  * 脏值检测
  * 
  * 什么是脏值检测？
- * 当数据改变时更新试图
+ * 当数据改变时更新视图
  * 
  * 什么时候会触发脏值检测？
  * １：浏览器事件如click,mouseover,keyup等
  * ２：setTimeout()和setInterval()
  * 3: HTTP请求
+ * 
  * 无法触发变更检测的情况：
  * １：使用异步方式运行的第三方类库；
  * ２：不可变数据
@@ -121,10 +122,10 @@ export class HomeGrandComponent implements OnInit {
                 this._title = '你好';
                 this._time = Date.now();
                 console.log('======');
-            }, 1);
+            }, 1000);
         });
         setTimeout(() => {
             this.changeDetection.markForCheck();
-        }, 1);
+        }, 1000);
     }
 }
