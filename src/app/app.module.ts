@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +26,7 @@ import { registerLocaleData } from '@angular/common';
  */
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   /**
    * 在功能模块中定义子路由后，只要导入该模块，等同于在根路由中直接定义
@@ -43,7 +44,8 @@ import { registerLocaleData } from '@angular/common';
    * ```
    */
   imports: [
-    BrowserModule,FormsModule,SharedModule,AppRoutingModule,HomeModule
+    BrowserModule,FormsModule,SharedModule,
+    AppRoutingModule,HomeModule,HttpClientModule
   ],
   providers: [
     {
