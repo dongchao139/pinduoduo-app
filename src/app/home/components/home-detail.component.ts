@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Channel } from '../../shared/components/horizontal-grid/horizontal-grid.component';
 import { ImageSlider, ImageSliderComponent } from '../../shared/components/image-slider';
@@ -41,8 +42,9 @@ import { HomeService } from '../services/home.service';
     styles: [`
     .active {
       background-color: orangered;
-    }
-    `]
+    },
+    `],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeDetailComponent implements OnInit,AfterViewInit {
   sliders: ImageSlider[];
@@ -55,11 +57,18 @@ export class HomeDetailComponent implements OnInit,AfterViewInit {
   tabLink: string;
 
   constructor(private route: ActivatedRoute, 
+    // private changeDetection: ChangeDetectorRef,
     private service: HomeService) { }
 
   ngOnInit(): void {
-    this.channels = this.service.getChannels();
-    this.sliders = this.service.getSliders();
+    this.service.getChannels().subscribe(cns => {
+      this.channels = cns;
+      // this.changeDetection.markForCheck();
+    });
+    this.service.getSliders().subscribe(slds => {
+      this.sliders = slds;
+      // this.changeDetection.markForCheck();
+    });
     // 路径参数 (/:id;k=v;k2=v2)
     this.route.paramMap.subscribe(params => {
       console.log("路径参数：", params);
