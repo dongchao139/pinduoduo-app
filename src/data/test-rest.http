@@ -1,0 +1,40 @@
+@baseUrl=https://jsonplaceholder.typicode.com
+GET {{baseUrl}}/posts HTTP/1.1
+
+###
+GET {{baseUrl}}/posts/1 HTTP/1.1
+
+###
+POST {{baseUrl}}/posts HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "这是一个测试帖子的标题",
+    "body": "这是一个测试的内容",
+    "userId": 1
+}
+###
+PUT {{baseUrl}}/posts/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "这是一个测试帖子的标题",
+    "body": "这是一个测试的内容",
+    "userId": 1
+}
+
+###
+DELETE {{baseUrl}}/posts/1 HTTP/1.1
+
+###
+# Restful API
+# POST http://local.dev/api/posts
+
+# 动词决定操作
+# GET-查询 POST-新增 PUT-修改 DELETE-删除
+
+#名词代表资源
+# /products-复数代表集合 /products/{id}路径参数取得特定条目
+
+# 响应状态码
+# 2xx成功 3xx重定向 4xx客户端错误 5xx服务端错误
