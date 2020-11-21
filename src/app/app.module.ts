@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-router.module';
 import localZh from '@angular/common/locales/zh-Hans';
-import { HomeModule } from './home';
+import { HomeModule, ParamInterceptor } from './home';
 import { registerLocaleData } from '@angular/common';
 
 /**
@@ -51,6 +51,10 @@ import { registerLocaleData } from '@angular/common';
     {
       provide: LOCALE_ID,
       useValue: 'zh-Hans'
+    },{
+      provide: HTTP_INTERCEPTORS,
+      useClass: ParamInterceptor,
+      multi: true
     }
 ],
   bootstrap: [AppComponent]

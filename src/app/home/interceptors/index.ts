@@ -1,0 +1,1 @@
+export {ParamInterceptor} from './param.interceptors';
