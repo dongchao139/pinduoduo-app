@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-router.module';
 import localZh from '@angular/common/locales/zh-Hans';
-import { HomeModule, ParamInterceptor } from './home';
+import { HomeModule, NotificationInterceptor, ParamInterceptor } from './home';
 import { registerLocaleData } from '@angular/common';
 
 /**
@@ -54,6 +54,10 @@ import { registerLocaleData } from '@angular/common';
     },{
       provide: HTTP_INTERCEPTORS,
       useClass: ParamInterceptor,
+      multi: true
+    },{
+      provide: HTTP_INTERCEPTORS,
+      useClass: NotificationInterceptor,
       multi: true
     }
 ],
