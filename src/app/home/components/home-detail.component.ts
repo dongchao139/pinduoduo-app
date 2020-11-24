@@ -57,17 +57,17 @@ export class HomeDetailComponent implements OnInit,AfterViewInit {
   tabLink: string;
 
   constructor(private route: ActivatedRoute, 
-    // private changeDetection: ChangeDetectorRef,
+    private changeDetection: ChangeDetectorRef,
     private service: HomeService) { }
 
   ngOnInit(): void {
     this.service.getChannels().subscribe(cns => {
       this.channels = cns;
-      // this.changeDetection.markForCheck();
+      this.changeDetection.markForCheck();
     });
     this.service.getSliders().subscribe(slds => {
       this.sliders = slds;
-      // this.changeDetection.markForCheck();
+      this.changeDetection.markForCheck();
     });
     // 路径参数 (/:id;k=v;k2=v2)
     this.route.paramMap.subscribe(params => {
