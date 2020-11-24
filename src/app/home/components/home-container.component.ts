@@ -1,12 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import {TopMenu} from '../../shared/components/tab-bar'
 import { HomeService, token } from '../services/home.service';
 
 @Component({
     selector: 'home-container',
     template: `
-    <tab-bar [menus]="topMenus" 
+    <tab-bar [menus]="topMenus$ | async" 
         (onSelect)="handleSelect($event)"
         [backgroundColor]="backgroundColor"
     >
@@ -15,7 +16,7 @@ import { HomeService, token } from '../services/home.service';
     `
 })
 export class HomeContainerComponent implements OnInit {
-    topMenus: TopMenu[];
+    topMenus$: Observable<TopMenu[]>;
     backgroundColor: string;
 
     constructor(private router: Router,
@@ -23,9 +24,7 @@ export class HomeContainerComponent implements OnInit {
       @Inject(token) private baseUrl: string) { }
 
     ngOnInit(): void {
-          this.service.getTabs().subscribe(tabs => {
-            this.topMenus = tabs;
-          });
+          this.topMenus$ = this.service.getTabs();
           this.backgroundColor = 'white';
           console.log(this.baseUrl);
     }

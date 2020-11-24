@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscriber, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Channel } from '../../shared/components/horizontal-grid/horizontal-grid.component';
 import { ImageSlider, ImageSliderComponent } from '../../shared/components/image-slider';
 import { HomeService } from '../services/home.service';
@@ -8,10 +10,10 @@ import { HomeService } from '../services/home.service';
 @Component({
   selector: 'home-detail',
   template: `
-    <div *ngIf="tabLink === 'hot' else others">
-      <image-slider [sliders]="sliders"></image-slider>
+    <div *ngIf="(tabLink$|async) === 'hot' else others">
+      <image-slider [sliders]="sliders$ | async"></image-slider>
       <horizontal-grid>
-        <span gridItem *ngFor="let item of channels" #span>
+        <span gridItem *ngFor="let item of (channels$|async)" #span>
             <img [src]="item.icon" alt="" [gridItemImage]="'4rem'"/>
             <span gridItemTitle>{{item.title}}</span>
         </span>
@@ -47,35 +49,29 @@ import { HomeService } from '../services/home.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeDetailComponent implements OnInit,AfterViewInit {
-  sliders: ImageSlider[];
+  sliders$: Observable<ImageSlider[]>;
   title = 'pinduoduo-app';
-  channels: Channel[];
+  channels$: Observable<Channel[]>;
+  tabLink$: Observable<string>;
+  subscription: Subscription;
 
   @ViewChild(ImageSliderComponent, { static: false })
   imageSlider: ImageSliderComponent;
-
-  tabLink: string;
 
   constructor(private route: ActivatedRoute, 
     private changeDetection: ChangeDetectorRef,
     private service: HomeService) { }
 
   ngOnInit(): void {
-    this.service.getChannels().subscribe(cns => {
-      this.channels = cns;
-      this.changeDetection.markForCheck();
-    });
-    this.service.getSliders().subscribe(slds => {
-      this.sliders = slds;
-      this.changeDetection.markForCheck();
-    });
+    this.channels$ = this.service.getChannels();
+    this.sliders$ = this.service.getSliders();
     // 路径参数 (/:id;k=v;k2=v2)
-    this.route.paramMap.subscribe(params => {
-      console.log("路径参数：", params);
-      this.tabLink = params.get('tabLink');
-    });
+    this.tabLink$ = this.route.paramMap.pipe(
+      filter(params => params.has('tabLink')), 
+      map(params => params.get('tabLink'))
+    );
     // 查询参数（？k=v&k2=v2）
-    this.route.queryParamMap.subscribe(params => {
+    this.subscription = this.route.queryParamMap.subscribe(params => {
       console.log("查询参数：", params);
     });
   }
@@ -85,5 +81,10 @@ export class HomeDetailComponent implements OnInit,AfterViewInit {
       throw new Error('  @ViewChild(\'imageSlider\', { static: true }) 失败');
     }
     console.log(this.imageSlider);
+  }
+
+  ngOnDestroy(): void {
+    // 取消订阅
+    this.subscription.unsubscribe();
   }
 }

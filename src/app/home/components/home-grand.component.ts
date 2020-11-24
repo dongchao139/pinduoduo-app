@@ -122,10 +122,10 @@ export class HomeGrandComponent implements OnInit {
                 this._title = '你好';
                 this._time = Date.now();
                 console.log('======');
-            }, 1000);
+            }, 5000);
         });
         setTimeout(() => {
             this.changeDetection.markForCheck();
-        }, 1000);
+        }, 5000);
     }
 }
